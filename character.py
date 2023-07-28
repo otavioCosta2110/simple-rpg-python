@@ -44,3 +44,10 @@ class Character():
                 print(f"{self.getName()} died!")
         else:
             print(f"Damage was annullated by {self.getName()}'s defense!")
+    
+    def attacking(self, attacked):
+        attacked.take_damage(self.getAttack())
+        
+    def defend(self):
+        self.defense *= 2 
+        print(self.defense)

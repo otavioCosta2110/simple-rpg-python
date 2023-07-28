@@ -1,6 +1,8 @@
+import initial
 
-# print(player.getName())
-# print(player.getHealth())
-# print(player.getAttack())
-# print(player.getDefense())
-# print(player.getLevel())
+enemy = initial.create_enemy()
+player = initial.create_player()
+
+print(f"You encounter a {enemy.getName()}, how do you proceed?")
+print(enemy.getAscii())
+initial.action_menu(player, enemy)
