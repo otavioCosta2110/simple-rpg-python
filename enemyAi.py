@@ -7,8 +7,10 @@ def enemy_turn(enemy, player):
     choice = random.choices(choices, weights=weights)[0]
     match choice:
         case 1:
+            print(f"Enemy {enemy.getName()} attacks!")
             attack(enemy, player)
         case 2:
+            print(f"Enemy {enemy.getName()} defends")
             defend(enemy)
         case 3:
             print(f"Enemy {enemy.getName()} tries to run .",end="")

@@ -7,6 +7,7 @@ class Character():
         self.defense = defense
         self.level = level
         self.type = type
+        self.exp = 0
         
     def getName(self):
         return self.name
@@ -22,6 +23,9 @@ class Character():
     
     def getLevel(self):
         return self.level
+    
+    def getExp(self):
+        return self.exp
     
     def getAscii(self):
         ascii_art = ascii.ascii()
@@ -51,3 +55,13 @@ class Character():
     def defend(self):
         self.defense *= 2 
         print(self.defense)
+        
+    def receive_exp(self, enemy):
+        self.exp += enemy.getLevel()
+        self.level_up()
+        
+    def level_up(self):
+        if self.getExp() < int(self.getLevel()) * 3.5:
+            self.level += 1
+            print(f"You Leveld up! Your current level is {self.getLevel()}")
+            

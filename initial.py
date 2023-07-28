@@ -80,6 +80,7 @@ def encounter(enemy, player):
             print(enemy.getAscii())
             enemyAi.enemy_turn(enemy,player)
         else:
+            player.receive_exp(enemy)
             break
         if not player.is_alive():
             break
