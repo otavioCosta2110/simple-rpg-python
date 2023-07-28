@@ -35,9 +35,12 @@ class Character():
             return False
 
     def take_damage(self, damage):
-        if damage >= self.defense:
-            self.health -= damage - self.defense
+        damage = int(damage)
+        if damage >= self.getDefense():
+            self.health -= damage - self.getDefense()
             if self.is_alive():
                 print(f"Character {self.name} has {self.health} remaining health!")
+            else:
+                print(f"{self.getName()} died!")
         else:
-            print("Damage was annulled by the character's defense!")
+            print(f"Damage was annullated by {self.getName()}'s defense!")
