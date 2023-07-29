@@ -1,6 +1,10 @@
 import initial
+import createEnemy
 
-enemy = initial.create_enemy()
+#* Criar sistema de itens
 player = initial.create_player()
-
-initial.encounter(enemy, player)
+while True:
+    enemy = createEnemy.create_enemy()
+    initial.encounter(enemy, player)
+    if not player.is_alive():
+        break
