@@ -1,7 +1,7 @@
 import points
 import ascii
 class Character():
-    def __init__(self, name, health=1, attack=0, defense=0, level=1, type='player'):
+    def __init__(self, name, health=1, attack=1, defense=1, level=1, type='player'):
         self.name = name
         self.health = health
         self.attack = attack
@@ -62,7 +62,7 @@ class Character():
         self.level_up()
         
     def level_up(self):
-        if self.getExp() < int(self.getLevel()) * 3.5:
+        if self.getExp() >= int(self.getLevel()) * 3.5:
             self.level += 1
             print(f"You Leveld up! Your current level is {self.getLevel()}")
             points.point_system(self, 1)

@@ -1,3 +1,4 @@
+import items
 import createEnemy
 import enemyAi
 import time
@@ -10,6 +11,8 @@ def create_player():
     
     player = character.Character(name)
     player = points.point_system(player, 20)
+    potion = items.Item('potion', 10)
+    player.health += potion.resHP()
     return player
 
 def action_menu(player, enemy):
@@ -48,6 +51,6 @@ def encounter(enemy, player):
             player.receive_exp(enemy)
             break
         if player.is_alive():
-            createEnemy.create_enemy
+            createEnemy.create_enemy(player)
         else:
             break
