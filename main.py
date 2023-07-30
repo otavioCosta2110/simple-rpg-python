@@ -1,9 +1,7 @@
 import initial
 import createEnemy
 
-#* Criar sistema de itens
-#* Criado: Classe de itens
-#* Falta: monstros droparem itens, mais itens, mais um monte de coisa
+#* ToDo: monsters drop items, quit without endind turn in action_menu
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)

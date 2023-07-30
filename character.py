@@ -66,4 +66,13 @@ class Character():
             self.level += 1
             print(f"You Leveld up! Your current level is {self.getLevel()}")
             points.point_system(self, 1)
-            
+    
+    def use_item(self, type, value):
+        match type:
+            case 'health':
+                self.health += value
+            case 'attack':
+                self.attack += value
+            case 'health':
+                self.defense += value
+                
