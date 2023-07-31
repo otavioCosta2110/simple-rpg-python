@@ -2,6 +2,7 @@ import initial
 import createEnemy
 
 #* ToDo: monsters drop items, quit without endind turn in action_menu
+#* magic?
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)
