@@ -1,8 +1,11 @@
 import initial
 import createEnemy
+#! bugs:
+#! enemy's level system is kind of broken
 
-#* ToDo: monsters drop items, quit without endind turn in action_menu
-#* magic?
+#* ToDo:
+#* magic, health limit, enemy weakness and resistence to magic, cool boxes for selecting
+#* armour, overwolrd?
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)

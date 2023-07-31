@@ -5,26 +5,32 @@ import time
 import character
 import random
 import points
+import magic
 
-potion = items.Item('Potion', 'health', 1,  10)
-power_plus = items.Item('Power Plus', 'attack', 1, 0, 10)
-steroids = items.Item('Steroids', 'defense', 1, 0, 0, 10)
+item_list = [
+    items.Item('Potion', 'health', 1,  10),
+    items.Item('Power Plus', 'attack', 1, 0, 10),
+    items.Item('Steroids', 'defense', 1, 0, 0, 10)
+]
 
-item_list = []
+magic_list = [
+    magic.Magic('Fireball', 'black', 'fire', 10, 2),
+    magic.Magic('Cure', 'white', 'light', 5, 2)
+]
 
 def create_player():
-    item_list.append(potion)
-    item_list.append(power_plus)
-    item_list.append(steroids)
     
     name = input("What is your name? ")
     player = character.Character(name)
-    player = points.point_system(player, 50)
+    player = points.point_system(player, 20)
     return player
 
 def action_menu(player, enemy):
     print("What will you do? \n")
-    choice = int(input("|1. Attack       |\n|2. Defend       |\n|3. Run          |\n|4. Check status |\n|5. Use Item     |\n"))
+    print(" ________________")
+    choice = int(input("|1. Attack       |\n|2. Defend       |\n|3. Run          |\n|4. Check status |\n|5. Use Item     |\n|6. Use Magic    |\n ----------------\n"))
+    # print(" ----------------")
+    
     while True:
         match choice:
             case 1:
@@ -67,9 +73,25 @@ def action_menu(player, enemy):
                     item_used.quantity -= 1
                     player.use_item(item_used.type, item_used.getValues())
                     return True
+            case 6:
+                print("\n")
+                print(" ______________________________________________")
+                print(f'|Name   {" " * (10 - len("Name"))}|Power{" " * (10 - len("Power"))}|Kind{" " * (10 - len("Kind"))}|Cost{" " * (10 - len("Cost"))}|')
+                for index, i in enumerate(magic_list, 1):
+                    spaces = " " * (10 - len(i.name))
+                    spaces_power = " " * (10 - len(str(i.power)))
+                    spaces_kind = " " * (10 - len(i.kind))
+                    print(f"|{index}. {i.name}{spaces}|{i.power}{spaces_power}|{i.kind}{spaces_kind}| Cost: {i.cost}  |")
+                print(" ----------------------------------------------")
+                magic_choice = int(input("\nWhich will you choose? "))
+                if magic_list[magic_choice - 1].act(enemy, player):
+                    break
+                else:
+                    action_menu(player, enemy)
+                    break
                                         
 def encounter(enemy, player):
-    print(f"You encounter a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
+    print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
     print(enemy.getAscii())
     while True:
         

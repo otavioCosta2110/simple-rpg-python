@@ -1,11 +1,12 @@
 import points
 import ascii
 class Character():
-    def __init__(self, name, health=1, attack=1, defense=1, level=1, type='player'):
+    def __init__(self, name, health=1, attack=1, defense=1, magic=1, level=1, type='player'):
         self.name = name
         self.health = health
         self.attack = attack
         self.defense = defense
+        self.magic = magic
         self.level = level
         self.type = type
         self.exp = 0
@@ -21,6 +22,9 @@ class Character():
     
     def getDefense(self):
         return self.defense
+    
+    def getMagic(self):
+        return self.magic
     
     def getLevel(self):
         return self.level
