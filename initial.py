@@ -22,7 +22,7 @@ def create_player():
     
     name = input("What is your name? ")
     player = character.Character(name)
-    player = points.point_system(player, 20)
+    player = points.point_system(player, 100)
     return player
 
 def action_menu(player, enemy):
@@ -50,7 +50,7 @@ def action_menu(player, enemy):
                     print(" You couldnt run away!")
                 break
             case 4:
-                print(f"\nHealth: {player.getHealth()}\nAttack: {player.getAttack()}\nDefense: {player.getDefense()}\n")
+                print(f"\nHealth: {player.getHealth()}/{player.getHLimit()}\nAttack: {player.getAttack()}\nDefense: {player.getDefense()}\nMagic: {player.getMagic()}\n")
                 action_menu(player, enemy)
                 break
             case 5:

@@ -17,7 +17,8 @@ def point_system(player, remainingPoints):
         remainingPoints -= points
         match int(spendChoice):
             case 1:
-                player.health += points
+                player.healthlimit += points
+                player.health = player.healthlimit
             case 2:
                 player.attack += points
             case 3:

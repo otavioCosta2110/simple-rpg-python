@@ -4,7 +4,7 @@ import createEnemy
 #! enemy's level system is kind of broken
 
 #* ToDo:
-#* magic, health limit, enemy weakness and resistence to magic, cool boxes for selecting
+#* magic, enemy weakness and resistence to magic, cool boxes for selecting
 #* armour, overwolrd?
 player = initial.create_player()
 while True:

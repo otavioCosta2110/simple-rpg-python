@@ -1,7 +1,7 @@
 import points
 import ascii
 class Character():
-    def __init__(self, name, health=1, attack=1, defense=1, magic=1, level=1, type='player'):
+    def __init__(self, name, health=1, attack=1, defense=1, magic=1, level=1, type='player', healthlimit=1):
         self.name = name
         self.health = health
         self.attack = attack
@@ -9,6 +9,7 @@ class Character():
         self.magic = magic
         self.level = level
         self.type = type
+        self.healthlimit = health
         self.exp = 0
         
     def getName(self):
@@ -31,6 +32,9 @@ class Character():
     
     def getExp(self):
         return self.exp
+    
+    def getHLimit(self):
+        return self.healthlimit
     
     def getAscii(self):
         ascii_art = ascii.ascii()
@@ -74,7 +78,12 @@ class Character():
     def use_item(self, type, value):
         match type:
             case 'health':
-                self.health += value
+                if self.health + value < self.healthlimit:
+                    self.health += value
+                else:
+                    self.health += self.healthlimit - self.health
+                    
+                print(self.health, self.healthlimit, value)
             case 'attack':
                 self.attack += value
             case 'health':
