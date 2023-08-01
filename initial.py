@@ -7,6 +7,10 @@ import random
 import points
 import magic
 
+        
+def recreateEncounter():
+    return True
+
 item_list = [
     items.Item('Potion', 'health', 1,  10),
     items.Item('Power Plus', 'attack', 1, 0, 10),
@@ -25,13 +29,13 @@ def create_player():
     player = points.point_system(player, 100)
     return player
 
-def action_menu(player, enemy):
+def action_menu(player, enemy, og_defense):
     print("What will you do? \n")
     print(" ________________")
     choice = int(input("|1. Attack       |\n|2. Defend       |\n|3. Run          |\n|4. Check status |\n|5. Use Item     |\n|6. Use Magic    |\n ----------------\n"))
-    # print(" ----------------")
     
     while True:
+        player.reverse_defense(og_defense)
         match choice:
             case 1:
                 player.attacking(enemy)
@@ -46,12 +50,17 @@ def action_menu(player, enemy):
                     print(".",end="")
                 if random.choice([True, False]):
                     print(" You ran away!")
+                    newenemy = createEnemy.create_enemy(player)
+                    encounter(newenemy, player)
+                    break
                 else:
                     print(" You couldnt run away!")
-                break
+                    break
             case 4:
+                print(" ______________________________________________")
                 print(f"\nHealth: {player.getHealth()}/{player.getHLimit()}\nAttack: {player.getAttack()}\nDefense: {player.getDefense()}\nMagic: {player.getMagic()}\n")
-                action_menu(player, enemy)
+                print(" ----------------------------------------------")
+                action_menu(player, enemy, og_defense)
                 break
             case 5:
                 print("\n")
@@ -65,7 +74,7 @@ def action_menu(player, enemy):
                 item_choice = input("\nWhich will you choose? ")
                 if item_choice == 'q':
                     print("Saiu")
-                    action_menu(player, enemy)
+                    action_menu(player, enemy, og_defense)
                     break
                 else:    
                     item_used = valid_items[int(item_choice) - 1]
@@ -93,9 +102,10 @@ def action_menu(player, enemy):
 def encounter(enemy, player):
     print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
     print(enemy.getAscii())
+    og_defense = player.getDefense()
     while True:
         
-        if action_menu(player, enemy):
+        if action_menu(player, enemy, og_defense):
             continue
         if enemy.is_alive():
             print(f"Enemy {enemy.getName()} is still alive!")
@@ -111,4 +121,3 @@ def encounter(enemy, player):
             createEnemy.create_enemy(player)
         else:
             break
-        

@@ -16,7 +16,13 @@ class Magic():
     def act(self, enemy, player):
         if self.can_use(player):
             if self.kind =='black':
-                enemy.take_damage(self.power)
+                if self.type == enemy.getMagicRes():
+                    enemy.take_damage(int(self.power * 0.5))
+                elif self.type == enemy.getMagicWeak():
+                    enemy.take_damage(int(self.power * 2))
+                else:
+                    enemy.take_damage(self.power)
+                    
             else:
                 player.health += self.power
             print(f"You used {self.name}!")

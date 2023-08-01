@@ -1,13 +1,15 @@
 import points
 import ascii
 class Character():
-    def __init__(self, name, health=1, attack=1, defense=1, magic=1, level=1, type='player', healthlimit=1):
+    def __init__(self, name, health=1, attack=1, defense=1, magic=1, magicRes='none', magicWeak='none', level=1, type='player', healthlimit=1):
         self.name = name
         self.health = health
         self.attack = attack
         self.defense = defense
         self.magic = magic
         self.level = level
+        self.magicRes = magicRes
+        self.magicWeak = magicWeak
         self.type = type
         self.healthlimit = health
         self.exp = 0
@@ -30,6 +32,12 @@ class Character():
     def getLevel(self):
         return self.level
     
+    def getMagicRes(self):
+        return self.magicRes
+    
+    def getMagicWeak(self):
+        return self.magicWeak
+
     def getExp(self):
         return self.exp
     
@@ -62,8 +70,13 @@ class Character():
         attacked.take_damage(self.getAttack())
         
     def defend(self):
-        self.defense *= 2 
+        self.defense *= 2
         print(self.defense)
+        
+    
+    def reverse_defense(self, defense):
+        print(self.defense)
+        self.defense = defense
         
     def receive_exp(self, enemy):
         self.exp += enemy.getLevel()
@@ -75,13 +88,16 @@ class Character():
             print(f"You Leveld up! Your current level is {self.getLevel()}")
             points.point_system(self, 1)
     
+    def heal(self, value):
+        self.health += value
+        
     def use_item(self, type, value):
         match type:
             case 'health':
                 if self.health + value < self.healthlimit:
-                    self.health += value
+                    self.heal(value)
                 else:
-                    self.health += self.healthlimit - self.health
+                    self.heal(self.healthlimit)
                     
                 print(self.health, self.healthlimit, value)
             case 'attack':

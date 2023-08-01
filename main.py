@@ -4,11 +4,16 @@ import createEnemy
 #! enemy's level system is kind of broken
 
 #* ToDo:
-#* magic, enemy weakness and resistence to magic, cool boxes for selecting
+#* more magic
 #* armour, overwolrd?
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)
     initial.encounter(enemy, player)
+    
+    if initial.recreateEncounter():
+        enemy = createEnemy.create_enemy(player)
+        initial.encounter(enemy, player)    
+    
     if not player.is_alive():
         break
