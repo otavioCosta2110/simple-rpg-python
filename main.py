@@ -4,7 +4,7 @@ import createEnemy
 #! enemy's level system is kind of broken
 
 #* ToDo:
-#* armour, overwolrd?
+#* armour, alter character sprite as armour changes, overwolrd?
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)

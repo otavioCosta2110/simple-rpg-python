@@ -1,7 +1,7 @@
 import points
 import ascii
 class Character():
-    def __init__(self, name, health=1, attack=1, defense=1, magic=1, magicRes='none', magicWeak='none', level=1, type='player', healthlimit=1):
+    def __init__(self, name, health=1, attack=1, defense=1, magic=1, magicRes='None', magicWeak='None', level=1, type='player', healthlimit=1, armour=None):
         self.name = name
         self.health = health
         self.attack = attack
@@ -12,6 +12,7 @@ class Character():
         self.magicWeak = magicWeak
         self.type = type
         self.healthlimit = health
+        self.armour = armour
         self.exp = 0
         
     def getName(self):
@@ -44,6 +45,13 @@ class Character():
     def getHLimit(self):
         return self.healthlimit
     
+    def getArmour(self):
+        if self.armour == None:
+            return 'None'
+        else:
+            return self.armour.name
+            
+    
     def getAscii(self):
         ascii_art = ascii.ascii()
         if self.type == 'player':
@@ -72,12 +80,9 @@ class Character():
         attacked.take_damage(self.getAttack())
         
     def defend(self):
-        self.defense *= 2
-        print(self.defense)
-        
+        self.defense *= 2        
     
     def reverse_defense(self, defense):
-        print(self.defense)
         self.defense = defense
         
     def receive_exp(self, enemy):

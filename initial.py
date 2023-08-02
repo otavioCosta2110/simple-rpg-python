@@ -7,12 +7,17 @@ import random
 import points
 import magic
 import inventory
-        
+import armour
+    
 def recreateEncounter():
     return True
-#* armour_list = [
-    
-# ]
+
+armour_list = [
+    armour.armour('Fire Armour', 3, 3, 'fire', 'ice'),
+    armour.armour('Ice Armour', 3, 3, 'ice', 'fire'),
+    armour.armour('Lightining Armour', 3, 3, 'light'),
+    armour.armour('Obsidian Armour', 3, 3, 'fire', 'light')
+]
 
 item_list = [
     items.Item('Potion', 'health', 1,  10),
@@ -34,16 +39,16 @@ def create_player():
     player = points.point_system(player, 100)
     return player
 
-def action_menu(player, enemy, og_defense):
+def action_menu(player, enemy):
     print("What will you do? \n")
     print(" ___________________")
     choice = int(input("|1. Attack          |\n|2. Defend          |\n|3. Run             |\n|4. Check inventory |\n|5. Use Item        |\n|6. Use Magic       |\n -------------------\n"))
     
     while True:
-        player.reverse_defense(og_defense)
         match choice:
             case 1:
                 player.attacking(enemy)
+                print(player.getDefense())
                 break
             case 2:
                 player.defend()
@@ -63,7 +68,7 @@ def action_menu(player, enemy, og_defense):
                     break
             case 4:
                 inventory.check(player)
-                action_menu(player, enemy, og_defense)
+                action_menu(player, enemy)
                 break
             case 5:
                 print("\n")
@@ -77,7 +82,7 @@ def action_menu(player, enemy, og_defense):
                 item_choice = input("\nWhich will you choose? ")
                 if item_choice == 'q':
                     print("Saiu")
-                    action_menu(player, enemy, og_defense)
+                    action_menu(player, enemy)
                     break
                 else:    
                     item_used = valid_items[int(item_choice) - 1]
@@ -105,20 +110,23 @@ def action_menu(player, enemy, og_defense):
 def encounter(enemy, player):
     print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
     print(enemy.getAscii())
-    og_defense = player.getDefense()
     while True:
         
-        if action_menu(player, enemy, og_defense):
+        if action_menu(player, enemy):
             continue
         if enemy.is_alive():
             print(f"Enemy {enemy.getName()} is still alive!")
             enemyAi.enemy_turn(enemy,player)
         else:
             player.receive_exp(enemy)
-            if random.random() < 0.5:
+            if random.random() < 0.3:
                 item_dropped = random.choice(item_list)
                 item_dropped.quantity += 1
                 print(f"You gained {item_dropped.name}")
+            if random.random() < 0.9:
+                armour_dropped = random.choice(armour_list)
+                inventory.armour_gotten.append(armour_dropped)
+                print(f"You got {armour_dropped.name}")
             break
         if player.is_alive():
             createEnemy.create_enemy(player)
