@@ -4,7 +4,6 @@ import createEnemy
 #! enemy's level system is kind of broken
 
 #* ToDo:
-#* more magic
 #* armour, overwolrd?
 player = initial.create_player()
 while True:

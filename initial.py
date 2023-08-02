@@ -6,10 +6,13 @@ import character
 import random
 import points
 import magic
-
+import inventory
         
 def recreateEncounter():
     return True
+#* armour_list = [
+    
+# ]
 
 item_list = [
     items.Item('Potion', 'health', 1,  10),
@@ -19,6 +22,8 @@ item_list = [
 
 magic_list = [
     magic.Magic('Fireball', 'black', 'fire', 10, 2),
+    magic.Magic('Ice Spear', 'black', 'fire', 10, 2),
+    magic.Magic('Bolt', 'black', 'light', 10, 2),
     magic.Magic('Cure', 'white', 'light', 5, 2)
 ]
 
@@ -31,8 +36,8 @@ def create_player():
 
 def action_menu(player, enemy, og_defense):
     print("What will you do? \n")
-    print(" ________________")
-    choice = int(input("|1. Attack       |\n|2. Defend       |\n|3. Run          |\n|4. Check status |\n|5. Use Item     |\n|6. Use Magic    |\n ----------------\n"))
+    print(" ___________________")
+    choice = int(input("|1. Attack          |\n|2. Defend          |\n|3. Run             |\n|4. Check inventory |\n|5. Use Item        |\n|6. Use Magic       |\n -------------------\n"))
     
     while True:
         player.reverse_defense(og_defense)
@@ -57,9 +62,7 @@ def action_menu(player, enemy, og_defense):
                     print(" You couldnt run away!")
                     break
             case 4:
-                print(" ______________________________________________")
-                print(f"\nHealth: {player.getHealth()}/{player.getHLimit()}\nAttack: {player.getAttack()}\nDefense: {player.getDefense()}\nMagic: {player.getMagic()}\n")
-                print(" ----------------------------------------------")
+                inventory.check(player)
                 action_menu(player, enemy, og_defense)
                 break
             case 5:

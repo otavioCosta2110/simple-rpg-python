@@ -14,7 +14,7 @@ def create_enemy(player):
     if enemy_name == 'Goblin':
         enemy.health = int((enemy.level * player.level) + 4)
         enemy.attack = int((enemy.level * player.level) + 2)
-        enemy.defense = int((enemy.level * (player.level+0.5)) + 3)
+        enemy.defense = int((enemy.level * (player.level/2)) + 3)
         enemy.magicRes = 'fire'
         enemy.magicWeak = 'ice'
         
@@ -29,6 +29,6 @@ def create_enemy(player):
         enemy.health = (enemy.level * 2) + 3
         enemy.attack = math.ceil((enemy.level * 16/3) + 5)
         enemy.defense = (enemy.level * 4) + 1
-        enemy.magicRes = 'lightning'
+        enemy.magicRes = 'light'
     
     return enemy

@@ -46,6 +46,8 @@ class Character():
     
     def getAscii(self):
         ascii_art = ascii.ascii()
+        if self.type == 'player':
+            return ascii_art.get_ascii('player')
         return ascii_art.get_ascii(self.name)
     
     def is_alive(self):
