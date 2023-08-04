@@ -1,6 +1,7 @@
 import os
 
 import items
+import overworld
 import createEnemy
 import enemyAi
 import time
@@ -151,3 +152,9 @@ def encounter(enemy, player):
             createEnemy.create_enemy(player)
         else:
             break
+        
+def init_world(player, enemy):
+    if random.random():
+        overworld.showPath()
+    else:
+        encounter(enemy, player)
