@@ -1,7 +1,5 @@
-import time
 import random
-import character
-def enemy_turn(enemy, player):
+def enemy_turn(enemy, player):    
     choices = [1, 2]
     weights = [60, 40]
     choice = random.choices(choices, weights=weights)[0]

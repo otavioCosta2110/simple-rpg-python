@@ -12,7 +12,6 @@ class armour():
       player.magicRes = self.magicRes
       player.magicWeak = self.magicWeak
       player.armour = self
-      print(player.defense, self.defense)
       
     def unequip(self, player):
       player.defense -= self.defense

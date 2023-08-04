@@ -12,11 +12,11 @@ def getStatus(player):
     spaces_defense = " " * (40 - len(str(player.getDefense())+ "|Defense: "))
     spaces_magic = " " * (40 - len(str(player.getMagic()) + "|Magic: "))
     spaces_armour = " " * (40 - len(player.getArmour() + "|Armour: "))
-    print(" ___________________")
+    print(" _______________________________________")
     print(f"|Health: {player.getHealth()}/{player.getHLimit()}{spaces_health}|\n|Attack: {player.getAttack()}{spaces_attack}|\n|Defense: {player.getDefense()}{spaces_defense}|\n|Magic: {player.getMagic()}{spaces_magic}|\n|Armour: {player.getArmour()}{spaces_armour}|")
-    print(" -------------------")
-    
-    print("Available Armour:")
+    print(" ---------------------------------------")
+    if len(armour_gotten) > 0:
+        print("Available Armour:")
     if(len(armour_gotten)> 0 ):
         for index, armour in enumerate(armour_gotten, 1):
             print(f"{index}. {armour.name}")

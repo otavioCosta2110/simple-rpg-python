@@ -1,3 +1,5 @@
+import os
+
 import items
 import createEnemy
 import enemyAi
@@ -8,6 +10,8 @@ import points
 import magic
 import inventory
 import armour
+    
+turn = 1
     
 def recreateEncounter():
     return True
@@ -40,11 +44,16 @@ def create_player():
     return player
 
 def action_menu(player, enemy):
+    print(f"Enemy {enemy.getName()} is still alive!")
+    print(enemy.getAscii())
+    print(f"Turn {turn}")
+    
     print("What will you do? \n")
     print(" ___________________")
     choice = int(input("|1. Attack          |\n|2. Defend          |\n|3. Run             |\n|4. Check inventory |\n|5. Use Item        |\n|6. Use Magic       |\n -------------------\n"))
     
     while True:
+        os.system('clear')
         match choice:
             case 1:
                 player.attacking(enemy)
@@ -59,15 +68,17 @@ def action_menu(player, enemy):
                     time.sleep(1)
                     print(".",end="")
                 if random.choice([True, False]):
-                    print(" You ran away!")
+                    os.system('clear')
+                    input(" You ran away!\n\nPress Enter to continue")
                     newenemy = createEnemy.create_enemy(player)
                     encounter(newenemy, player)
                     break
                 else:
-                    print(" You couldnt run away!")
+                    input(" You couldnt run away!\n\nPress Enter to continue")
                     break
             case 4:
                 inventory.check(player)
+                os.system('clear')
                 action_menu(player, enemy)
                 break
             case 5:
@@ -81,7 +92,7 @@ def action_menu(player, enemy):
                 print("\nq - quit")
                 item_choice = input("\nWhich will you choose? ")
                 if item_choice == 'q':
-                    print("Saiu")
+                    os.system('clear')
                     action_menu(player, enemy)
                     break
                 else:    
@@ -105,28 +116,32 @@ def action_menu(player, enemy):
                     break
                 else:
                     action_menu(player, enemy)
-                    break
+                    break        
+                
                                         
 def encounter(enemy, player):
+    global turn
+    os.system('clear')
     print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
-    print(enemy.getAscii())
     while True:
-        
         if action_menu(player, enemy):
             continue
         if enemy.is_alive():
-            print(f"Enemy {enemy.getName()} is still alive!")
             enemyAi.enemy_turn(enemy,player)
+            turn += 1
         else:
+            turn = 1
             player.receive_exp(enemy)
             if random.random() < 0.3:
                 item_dropped = random.choice(item_list)
                 item_dropped.quantity += 1
-                print(f"You gained {item_dropped.name}")
+                os.system('clear')
+                input(f"You gained {item_dropped.name}!\n\nPress enter to continue ")
             if random.random() < 0.9:
                 armour_dropped = random.choice(armour_list)
                 inventory.armour_gotten.append(armour_dropped)
-                print(f"You got {armour_dropped.name}")
+                os.system('clear')
+                input(f"You got {armour_dropped.name}!\n\nPress enter to continue ")
             break
         if player.is_alive():
             createEnemy.create_enemy(player)

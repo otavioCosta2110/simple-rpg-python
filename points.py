@@ -1,6 +1,8 @@
+import os
 def point_system(player, remainingPoints):
     while remainingPoints >0:
         while True:
+            os.system('clear')
             print(f"\nYou have {remainingPoints} remaining points to spend. What do you want to spend them in?\n")
             spendChoice = input(f"1. Health  {player.health}\n2. Attack  {player.attack}\n3. Defense {player.defense}\n4. Magic   {player.magic}\n")
             if spendChoice =='1' or spendChoice =='2' or spendChoice =='3' or spendChoice =='4':

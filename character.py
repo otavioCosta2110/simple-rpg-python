@@ -55,7 +55,10 @@ class Character():
     def getAscii(self):
         ascii_art = ascii.ascii()
         if self.type == 'player':
-            return ascii_art.get_ascii('player')
+            if self.armour != None:
+                return ascii_art.get_ascii(self.getArmour())
+            else:
+                return ascii_art.get_ascii('player')
         return ascii_art.get_ascii(self.name)
     
     def is_alive(self):
@@ -106,7 +109,6 @@ class Character():
                 else:
                     self.heal(self.healthlimit)
                     
-                print(self.health, self.healthlimit, value)
             case 'attack':
                 self.attack += value
             case 'health':

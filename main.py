@@ -2,9 +2,12 @@ import initial
 import createEnemy
 #! bugs:
 #! enemy's level system is kind of broken
+#! Defense system not working properly
 
 #* ToDo:
-#* armour, alter character sprite as armour changes, overwolrd?
+#* overwolrd?
+#* make cool interface
+#* Bosses
 player = initial.create_player()
 while True:
     enemy = createEnemy.create_enemy(player)
