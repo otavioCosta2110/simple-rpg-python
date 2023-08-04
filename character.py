@@ -83,10 +83,12 @@ class Character():
         attacked.take_damage(self.getAttack())
         
     def defend(self):
-        self.defense *= 2        
+        self.defense *= 2
+        return True
     
-    def reverse_defense(self, defense):
-        self.defense = defense
+    def reverse_defense(self):
+        self.defense /= 2
+        return False
         
     def receive_exp(self, enemy):
         self.exp += enemy.getLevel()

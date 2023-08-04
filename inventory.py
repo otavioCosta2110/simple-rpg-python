@@ -30,3 +30,5 @@ def getStatus(player):
                 armour_gotten[choice_armour - 1].equip(player)
             else:
                 print("Already Equipped!")
+    else:
+        input("You Have nothing to equip!\n\nPress Enter to Continue")

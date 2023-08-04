@@ -12,7 +12,7 @@ import inventory
 import armour
     
 turn = 1
-    
+is_defending = False
 def recreateEncounter():
     return True
 
@@ -44,6 +44,7 @@ def create_player():
     return player
 
 def action_menu(player, enemy):
+    global is_defending
     print(f"Enemy {enemy.getName()} is still alive!")
     print(enemy.getAscii())
     print(f"Turn {turn}")
@@ -54,13 +55,15 @@ def action_menu(player, enemy):
     
     while True:
         os.system('clear')
+        if is_defending:
+            is_defending = player.reverse_defense()
         match choice:
             case 1:
                 player.attacking(enemy)
-                print(player.getDefense())
                 break
             case 2:
-                player.defend()
+                is_defending = player.defend()
+                print(f"Sua defesa agora é {player.getDefense()}")
                 break
             case 3:
                 print("You try to run .",end="")
@@ -100,7 +103,8 @@ def action_menu(player, enemy):
                     print(f"You used {item_used.name}!")
                     item_used.quantity -= 1
                     player.use_item(item_used.type, item_used.getValues())
-                    return True
+                    # return True
+                    break
             case 6:
                 print("\n")
                 print(" ______________________________________________")
@@ -117,10 +121,10 @@ def action_menu(player, enemy):
                 else:
                     action_menu(player, enemy)
                     break        
-                
-                                        
+                          
 def encounter(enemy, player):
     global turn
+    global is_defending
     os.system('clear')
     print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
     while True:
