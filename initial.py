@@ -137,16 +137,13 @@ def encounter(enemy, player):
         else:
             turn = 1
             player.receive_exp(enemy)
-            if random.random() < 0.3:
-                item_dropped = random.choice(item_list)
-                item_dropped.quantity += 1
-                os.system('clear')
-                input(f"You gained {item_dropped.name}!\n\nPress enter to continue ")
-            if random.random() < 0.9:
-                armour_dropped = random.choice(armour_list)
-                inventory.armour_gotten.append(armour_dropped)
-                os.system('clear')
-                input(f"You got {armour_dropped.name}!\n\nPress enter to continue ")
+            os.system('clear')
+            item_dropped = random.choice(item_list)
+            item_dropped.giveItem()
+            os.system('clear')
+            armour_dropped = random.choice(armour_list)
+            armour_dropped.giveArmour()
+            os.system('clear')
             break
         if player.is_alive():
             createEnemy.create_enemy(player)
@@ -154,7 +151,5 @@ def encounter(enemy, player):
             break
         
 def init_world(player, enemy):
-    if random.random():
-        overworld.showPath()
-    else:
+    if not overworld.showPath(player, item_list):
         encounter(enemy, player)

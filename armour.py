@@ -1,3 +1,5 @@
+import random
+import inventory
 class armour():
     def __init__(self, name, attack, defense, magicRes='None', magicWeak='None'):
       self.name = name
@@ -19,3 +21,8 @@ class armour():
       player.magicRes = 'none'
       player.magicWeak = 'none'
       player.armour = 'none'
+      
+    def giveArmour(self):
+      if random.random() < 0.1:
+        inventory.armour_gotten.append(self)
+        input(f"You got {self.name}!\n\nPress enter to continue ")
