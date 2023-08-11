@@ -1,18 +1,20 @@
 import os
 
-import items
-import overworld
-import createEnemy
-import enemyAi
+import usable.items as items
+import other.overworld as overworld
+import enemies.createEnemy as createEnemy
+import enemies.createBoss as createBoss
+import enemies.enemyAi as enemyAi
 import time
-import character
+import player.character as character
 import random
-import points
-import magic
-import inventory
-import armour
+import player.points as points
+import usable.magic as magic
+import usable.inventory as inventory
+import usable.armour as armour
     
 turn = 1
+totalTurn = 0
 is_defending = False
 def recreateEncounter():
     return True
@@ -49,6 +51,7 @@ def action_menu(player, enemy):
     print(f"Enemy {enemy.getName()} is still alive!")
     print(enemy.getAscii())
     print(f"Turn {turn}")
+    print(f"Turn {totalTurn}")
     
     print("What will you do? \n")
     print(" ___________________")
@@ -74,7 +77,7 @@ def action_menu(player, enemy):
                 if random.choice([True, False]):
                     os.system('clear')
                     input(" You ran away!\n\nPress Enter to continue")
-                    newenemy = createEnemy.create_enemy(player)
+                    newenemy = create_enemy(player)
                     encounter(newenemy, player)
                     break
                 else:
@@ -125,10 +128,12 @@ def action_menu(player, enemy):
                           
 def encounter(enemy, player):
     global turn
+    global totalTurn
     global is_defending
     os.system('clear')
     print(f"You encountered a {enemy.getName()} level {enemy.getLevel()}, how do you proceed?")
     while True:
+        totalTurn += 1
         if action_menu(player, enemy):
             continue
         if enemy.is_alive():
@@ -146,10 +151,19 @@ def encounter(enemy, player):
             os.system('clear')
             break
         if player.is_alive():
-            createEnemy.create_enemy(player)
+            create_enemy(player)
         else:
             break
         
 def init_world(player, enemy):
-    if not overworld.showPath(player, item_list):
+    if not overworld.showPath(item_list):
         encounter(enemy, player)
+        
+def create_enemy(player):
+    if totalTurn > 20:
+        rng = random.random()
+        print(rng)
+        if rng > 0.7:
+            return createBoss.create_boss(player)
+    else:
+        return createEnemy.create_enemy(player)

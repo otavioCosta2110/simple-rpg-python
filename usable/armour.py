@@ -1,5 +1,5 @@
 import random
-import inventory
+import usable.inventory as inventory
 class armour():
     def __init__(self, name, attack, defense, magicRes='None', magicWeak='None'):
       self.name = name

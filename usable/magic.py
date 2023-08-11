@@ -19,7 +19,11 @@ class Magic():
                 if self.type == enemy.getMagicRes():
                     enemy.take_damage(int(self.power * 0.5))
                 elif self.type == enemy.getMagicWeak():
-                    enemy.take_damage(int(self.power * 2))
+                    if enemy.type =='boss':
+                        multiplier = 4
+                    else:
+                        multiplier = 2
+                    enemy.take_damage(int(self.power * multiplier))
                 else:
                     enemy.take_damage(self.power)
                     

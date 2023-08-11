@@ -1,6 +1,6 @@
 import math
 import random
-import character
+import player.character as character
 def create_enemy(player):
     enemy_name_list = ['Goblin', 'Skeleton', 'Ogre']
     enemy_name = random.choice(enemy_name_list)

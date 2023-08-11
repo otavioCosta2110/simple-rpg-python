@@ -1,4 +1,4 @@
-import armour
+import usable.armour as armour
 
 armour_gotten = []
 

@@ -1,5 +1,5 @@
-import points
-import ascii
+import player.points as points
+import other.ascii as ascii
 class Character():
     def __init__(self, name, health=1, attack=1, defense=1, magic=1, magicRes='None', magicWeak='None', level=1, type='player', healthlimit=1, armour=None):
         self.name = name
